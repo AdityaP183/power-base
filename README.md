@@ -1,62 +1,52 @@
-### **HeroHub - To-Do List**
+# PowerBase
 
-#### ✅ **1. Project Setup**
-- [x] Create a new Go module (`go mod init herohub`).
-- [x] Define folder structure: `/cmd`, `/internal`, `/api`, `/docs`, `/web`.
+PowerBase is a high-performance API that provides superhero data with efficient caching and database management. It utilizes Go, Redis, and MySQL to deliver fast and reliable responses.
 
----
+## Features
+- 🚀 **Superhero Data API**: Retrieve details about various superheroes.
+- ⚡ **High Performance**: Uses Redis caching to speed up responses.
+- 🗄 **Database-Driven**: Stores and fetches data using MySQL.
+- 📡 **Pagination & Filtering**: Supports limit-based pagination for optimized queries.
+- 🔧 **Easy Configuration**: Load environment variables from `.env`.
 
-#### 🔨 **2. Backend (Golang API)**
-- [x] **Initialize Server (main.go in `/cmd/` folder)**
-  - [x] Set up HTTP router (using `net/http` or `mux`).
+## Installation
 
-- [x] **Define Models (in `/internal/models/hero.go`)**
-  - [x] `Hero`
-  - [x] `PowerStats`
-  - [x] `Appearance`
-  - [x] `Biography`
-  - [x] `Connections`
+### Prerequisites
+Ensure you have the following installed:
+- Go 1.20+
+- MySQL or MariaDB
+- Redis
 
-- [ ] **Business Logic Layer (in `/internal/core/hero.go`)**
-  - [ ] Functions to handle hero data.
-  - [ ] Functions for CRUD operations.
+### Setup
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/AdityaP183/power-base.git
+   cd power-base
+   ```
+2. Copy the example environment file:
+   ```sh
+   cp .env.example .env
+   ```
+   Edit `.env` to configure your database and Redis settings.
+3. Install dependencies:
+   ```sh
+   go mod tidy
+   ```
+4. Run the application:
+   ```sh
+   go run main.go
+   ```
 
-- [ ] **Storage Layer (in `/internal/storage/datastore.go`)**
-  - [ ] Load & save data (CSV/JSON/Database).
+## API Endpoints
 
-- [ ] **API Handlers (in `/api/handlers/`)**
-  - [ ] `hero.go` (CRUD operations for heroes).
-  - [ ] `search.go` (Search functionality).
+## Troubleshooting
+- **Database Not Connecting?** Ensure MySQL is running and `.env` is correctly set.
+- **Redis Connection Refused?** Start Redis using `redis-server` or `docker run -d -p 6379:6379 redis`.
+- **No Data in Response?** Run database migrations and insert test data.
 
-- [ ] **Middleware (in `/api/middleware/`)
-  - [ ] Logging Middleware (`logger.go`).
-  - [ ] Authentication Middleware (if needed).
+## Contributing
+Pull requests are welcome! Please follow the coding standards and ensure tests pass before submitting.
 
----
-
-#### 🔖 **3. Documentation (in `/docs/`)**
-- [ ] Create OpenAPI Specification (`openapi.yaml`).
-- [ ] Write Markdown Documentation (`README.md`).
-- [ ] Generate Swagger Docs (if using).
-
----
-
-#### 🌐 **4. Frontend & Docs Website (in `/web/`)**
-- [ ] **Static Site Setup**
-  - [ ] Create `index.html` (Homepage for documentation & data browsing).
-  - [ ] Add `static/` folder for CSS, JS, images.
-  - [ ] Add `templates/` for server-side rendering (if necessary).
-
-- [ ] **API Documentation Integration**
-  - [ ] Display data from API (`/api/handlers/hero.go`).
-  - [ ] Generate UI for browsing heroes.
-
----
-
-#### 📦 **5. Testing & Deployment**
-- [ ] Write Unit Tests (`*_test.go` files) for all handlers & core logic.
-- [ ] Set up CI/CD (GitHub Actions or similar).
-- [ ] Deploy Backend (e.g., Render, Railway, or your preferred service).
-- [ ] Deploy Frontend (Static site hosting like Vercel, Netlify, etc.).
-
+## License
+This project is licensed under the MIT License.
 
