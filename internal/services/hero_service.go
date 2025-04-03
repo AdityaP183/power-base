@@ -33,13 +33,33 @@ func (s *HeroService) GetHeroes(ctx context.Context, page, limit int) ([]models.
 }
 
 // GetHeroByID retrieves a hero by ID
-func (s *HeroService) GetHeroByID() {}
+func (s *HeroService) GetHeroByID(ctx context.Context, id string, fields []string) (*models.Hero, error) {
+	return s.repo.GetByID(ctx, id, fields)
+}
 
 // CreateHero adds a new hero
-func (s *HeroService) CreateHero() {}
+func (s *HeroService) CreateHero(ctx context.Context, hero *models.Hero) error {
+	return s.repo.CreateHero(ctx, hero)
+}
 
 // UpdateHero updates an existing hero
-func (s *HeroService) UpdateHero() {}
+func (s *HeroService) UpdateHero(ctx context.Context, hero *models.Hero) error {
+	err := s.repo.UpdateHero(ctx, hero)
+
+	if err != nil {
+		_ = s.cache.Delete("hero" + hero.ID)
+		_ = s.cache.Delete("hero:list")
+	}
+	return err
+}
 
 // DeleteHero removes a hero
-func (s *HeroService) DeleteHero() {}
+func (s *HeroService) DeleteHero(ctx context.Context, id string) error {
+	err := s.repo.DeleteHero(ctx, id)
+
+	if err != nil {
+		_ = s.cache.Delete("hero" + id)
+		_ = s.cache.Delete("hero:list")
+	}
+	return err
+}
